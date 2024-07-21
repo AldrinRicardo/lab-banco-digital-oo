@@ -4,12 +4,14 @@ public abstract class Conta implements IConta {
 	private static final int AGENCIA_PADRAO = 1;
 	private static int SEQUENCIAL = 1;
 
+	protected Banco banco;
 	protected int agencia;
 	protected int numero;
 	protected double saldo;
 	protected Cliente cliente;
 
-	public Conta(Cliente cliente) {
+	public Conta(Banco banco, Cliente cliente) {
+		this.banco = banco;
 		this.agencia = Conta.AGENCIA_PADRAO;
 		this.numero = SEQUENCIAL++;
 		this.cliente = cliente;
@@ -30,6 +32,10 @@ public abstract class Conta implements IConta {
 		this.sacar(valor);
 		contaDestino.depositar(valor);
 	}
+	
+	public String getBanco() {
+		return banco.getNome();
+	}
 
 	public int getAgencia() {
 		return agencia;
@@ -41,6 +47,10 @@ public abstract class Conta implements IConta {
 
 	public double getSaldo() {
 		return saldo;
+	}
+	
+	public String getCliente() {
+		return cliente.getNome();
 	}
 
 	protected void imprimirInfosComuns() {
